@@ -1,6 +1,16 @@
+'use client'
 import FacebookSignInBtn from '@/components/fb-signin'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const SignIn = () => {
+  const router = useRouter()
+  useEffect(() => {
+    const storedToken = localStorage.getItem('facebookAccessToken')
+    if (storedToken) {
+      router.push('/')
+    }
+  }, [router])
   return (
     <div className='w-full h-screen flex'>
       <div className='md:w-1/2 w-full flex justify-center items-center'>

@@ -1,35 +1,27 @@
 'use client'
-import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Inter } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
-import Navbar from '@/components/navbar'
 import { usePathname } from 'next/navigation'
+import { FacebookProvider } from './fb-session'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname()
-
   return (
-    <SessionProvider>
-      <body className={inter.className + ' min-h-screen'}>
+    <body className={inter.className + ' min-h-screen'}>
+      <FacebookProvider>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
           enableSystem
           disableTransitionOnChange
         >
-          {pathname !== '/auth/signin' && !pathname.startsWith('/f') ? (
-            <Navbar />
-          ) : (
-            ''
-          )}
           {children}
           <Toaster />
         </ThemeProvider>
-      </body>
-    </SessionProvider>
+      </FacebookProvider>
+    </body>
   )
 }
 

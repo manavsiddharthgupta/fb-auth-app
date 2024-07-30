@@ -24,6 +24,7 @@ const BackBtn = ({
         router.back()
       }}
       variant={variant}
+      size={'sm'}
     >
       {icon}
     </Button>
